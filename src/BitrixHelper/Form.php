@@ -14,7 +14,7 @@ class Form
 		return $result;
 	}
 
-	public function formHeader(array $attr = array())
+	public function Start(array $attr = array())
 	{
 		$arResult = $this->formArray;
 		$attrText = $this->getAttrText($attr);
@@ -22,7 +22,7 @@ class Form
 		return $result;
 	}
 
-	public function formFooter()
+	public function End()
 	{
 		$arResult = $this->formArray;
 		$result = '<input type="hidden" name="web_form_submit" value="Сохранить" />';
