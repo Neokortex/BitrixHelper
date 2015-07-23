@@ -22,7 +22,7 @@
  * в файле /local/php_interface/init.php подключаем наши классы
  
 	 ```php
-	 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/php_interface/vendor/bitrix-helper/src/autoload.php'); // BitrixHelper
+	 require_once($_SERVER['DOCUMENT_ROOT'].'/local/php_interface/vendor/bitrix-helper/src/autoload.php'); // BitrixHelper
 	 ```
 
 ## Работа с формами
