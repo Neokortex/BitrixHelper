@@ -11,9 +11,13 @@
 Должно получиться приблизительно следуующее дерево файлов:
 
 /local/php_interface/vendor/bitrix-helper/
+
 /local/php_interface/vendor/bitrix-helper/src/
+
 /local/php_interface/vendor/bitrix-helper/src/BitrixHelper/...
+
 /local/php_interface/vendor/bitrix-helper/src/autoload.php
+
 /local/php_interface/vendor/bitrix-helper/README.md
 
 ## Работа с формами
