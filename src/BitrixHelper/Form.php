@@ -30,7 +30,7 @@ class Form
 		return $result;
 	}
 
-	public function Submit(array $attr = array('class' => 'btn btn--default'), $title = 'Отправить', $value = 'Сохранить')
+	public function Submit($title = 'Отправить', array $attr = array('class' => 'btn btn--default'), $value = 'Сохранить')
 	{
 		return '<button type="submit" ' . $this->getAttrText($attr) . '>' . $title . '</button>';
 	}
