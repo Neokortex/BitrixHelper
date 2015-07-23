@@ -155,42 +155,41 @@ if($arResult["isUseCaptcha"] == "Y")
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $formHelper = new \BitrixHelper\Form($arResult);
-
 ?>
-
-<?=$formHelper->Start();?>
-<div class="row">
-	<div class="col-md-4">
-		<div class="form-group">
-			<?= $formHelper->Label(1) ?>
-			<?= $formHelper->Widget(1, array('class' => 'form-control')) ?>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-					<?= $formHelper->Label(2) ?>
-					<?= $formHelper->Widget(2, array('class' => 'form-control')) ?>
+<?= $formHelper->Start(); ?>
+	<div class="row">
+		<div class="col-md-4">
+			<?= $formHelper->Errors(); ?>
+			<div class="form-group">
+				<?= $formHelper->Label(1) ?>
+				<?= $formHelper->Widget(1) ?>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<?= $formHelper->Label(2) ?>
+						<?= $formHelper->Widget(2) ?>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<?= $formHelper->Label(3) ?>
+						<?= $formHelper->Widget(3) ?>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<?= $formHelper->Label(3) ?>
-					<?= $formHelper->Widget(3, array('class' => 'form-control')) ?>
-				</div>
+			<div class="form-group">
+				<?= $formHelper->Label(4) ?>
+				<?= $formHelper->Widget(4) ?>
 			</div>
-		</div>
-		<div class="form-group">
-			<?= $formHelper->Label(4) ?>
-			<?= $formHelper->Widget(4, array('class' => 'form-control')) ?>
-		</div>
-		<div class="form-group">
-			<?= $formHelper->Label(5) ?>
-			<?= $formHelper->Widget(5, array('class' => 'form-control')) ?>
-		</div>
-		<div class="form-group text-center">
-			<?= $formHelper->Submit(array('class'=>'btn')) ?>
+			<div class="form-group">
+				<?= $formHelper->Label(5) ?>
+				<?= $formHelper->Widget(5) ?>
+			</div>
+			<div class="form-group text-center">
+				<?= $formHelper->Submit() ?>
+			</div>
 		</div>
 	</div>
-</div>
-<?=$formHelper->End();?>
+<?= $formHelper->End(); ?>
 ```
