@@ -8,17 +8,22 @@
  * Скачиваем архив, распаковываем
  * Копируем сюда: /local/php_interface/vendor/bitrix-helper/
  
-Должно получиться приблизительно следуующее дерево файлов:
+	Должно получиться приблизительно следуующее дерево файлов:
 
-/local/php_interface/vendor/bitrix-helper/
+	/local/php_interface/vendor/bitrix-helper/
 
-/local/php_interface/vendor/bitrix-helper/src/
+	/local/php_interface/vendor/bitrix-helper/src/
 
-/local/php_interface/vendor/bitrix-helper/src/BitrixHelper/...
+	/local/php_interface/vendor/bitrix-helper/src/BitrixHelper/...
 
-/local/php_interface/vendor/bitrix-helper/src/autoload.php
+	/local/php_interface/vendor/bitrix-helper/src/autoload.php
 
-/local/php_interface/vendor/bitrix-helper/README.md
+	/local/php_interface/vendor/bitrix-helper/README.md
+ * в файле /local/php_interface/init.php подключаем наши классы
+ 
+	 ```php
+	 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/php_interface/vendor/bitrix-helper/src/autoload.php'); // BitrixHelper
+	 ```
 
 ## Работа с формами
 
