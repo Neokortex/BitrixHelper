@@ -115,7 +115,7 @@ class Form
 		return $attrText;
 	}
 
-	public function Widget($id, array $attr = array())
+	public function Widget($id, array $attr = array('class' => 'form-control'))
 	{
 		if (in_array($id, $this->printedFields)) return false;
 		$formInfo = $this->getFormInfo();
