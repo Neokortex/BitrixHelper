@@ -18,7 +18,7 @@ class Form
 	{
 		$arResult = $this->formArray;
 		$attrText = $this->getAttrText($attr);
-		$result = str_replace('<form ', '<form ' . trim($attrText), $arResult["FORM_HEADER"]);
+		$result = str_replace('<form ', '<form ' . $attrText, $arResult["FORM_HEADER"]);
 		return $result;
 	}
 
@@ -35,9 +35,9 @@ class Form
 		return '<button type="submit" ' . $this->getAttrText($attr) . '>' . $title . '</button>';
 	}
 
-	public function resultText($message = '', array $attr = array('class' => 'alert alert-success'))
+	public function Success($message = '', array $attr = array('class' => 'alert alert-success'))
 	{
-		$result = '';
+		$result = false;
 		$arResult = $this->formArray;
 		if ($note = $arResult['FORM_NOTE']) {
 			if ($message) $note = $message;
@@ -125,8 +125,10 @@ class Form
 		$attrText = $this->getAttrText($attr);
 		$question = $this->getQuestion($id);
 		$widget = $question['HTML_CODE'];
-		$widget = str_replace('<input ', '<input id="' . $field['NAME'] . '" ' . trim($attrText), $widget);
-		$widget = str_replace('<textarea ', '<textarea id="' . $field['NAME'] . '" ' . trim($attrText), $widget);
+		$widget = preg_replace('(class="(.+?)")', '', $widget);
+		$widget = preg_replace('(size="(.+?)")', '', $widget);
+		$widget = str_replace('<input ', '<input id="' . $field['NAME'] . '" ' . $attrText, $widget);
+		$widget = str_replace('<textarea ', '<textarea id="' . $field['NAME'] . '" ' . $attrText, $widget);
 		$this->printedFields[] = $id;
 		return $widget;
 	}
