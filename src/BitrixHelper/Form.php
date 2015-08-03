@@ -92,13 +92,13 @@ class Form
 		return $errors;
 	}
 
-	public function Label($id, $label = false, array $attr = array())
+	public function Label($id, $name = false, array $attr = array())
 	{
 		$attrText = $this->getAttrText($attr);
 		$field = $this->formInfo['FIELDS'][$id];
-		if (!$label)
-			$label = $field['LABEL'];
-		$result = '<label ' . $attrText . ' for="' . $field['NAME'] . '">' . $label . '</label>';
+		if (!$name)
+			$name = $field['LABEL'];
+		$result = '<label ' . $attrText . ' for="' . $field['NAME'] . '">' . $name . '</label>';
 		return $result;
 	}
 
