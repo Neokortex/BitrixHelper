@@ -92,11 +92,13 @@ class Form
 		return $errors;
 	}
 
-	public function Label($id, array $attr = array())
+	public function Label($id, $label = false, array $attr = array())
 	{
 		$attrText = $this->getAttrText($attr);
 		$field = $this->formInfo['FIELDS'][$id];
-		$result = '<label ' . $attrText . ' for="' . $field['NAME'] . '">' . $field['LABEL'] . '</label>';
+		if (!$label)
+			$label = $field['LABEL'];
+		$result = '<label ' . $attrText . ' for="' . $field['NAME'] . '">' . $label . '</label>';
 		return $result;
 	}
 
@@ -118,12 +120,15 @@ class Form
 	public function Widget($id, array $attr = array('class' => 'form-control'))
 	{
 		if (in_array($id, $this->printedFields)) return false;
+		$question = $this->getQuestion($id);
 		$formInfo = $this->getFormInfo();
 		$field = $formInfo['FIELDS'][$id];
 		unset($attr['name']);
 		unset($attr['value']);
+		if ($question['REQUIRED'] == 'Y') {
+			$attr['required'] = 'required';
+		}
 		$attrText = $this->getAttrText($attr);
-		$question = $this->getQuestion($id);
 		$widget = $question['HTML_CODE'];
 		$widget = preg_replace('(class="(.+?)")', '', $widget);
 		$widget = preg_replace('(size="(.+?)")', '', $widget);
@@ -152,6 +157,7 @@ class Form
 			preg_match('/name="(.+?)"/iu', $question['HTML_CODE'], $matches);
 			$fieldName = $matches[1];
 			$field['LABEL'] = $question['CAPTION'];
+			$field['REQUIRED'] = $question['REQUIRED'];
 			$field['NAME'] = $fieldName;
 			$fields[$arQuestion['ID']] = $field;
 		}
