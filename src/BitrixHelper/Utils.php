@@ -4,7 +4,30 @@ namespace BitrixHelper;
 
 class Utils
 {
+	public static function reArrayFormFiles($files)
+	{
+		$result = array();
+		foreach ($files as $key=>$arVal) {
+			foreach ($arVal as $fileKey=>$val){
+				$result[$fileKey][$key] = $val;
+			}
+		}
+		return $result;
+	}
 
+	/**
+	 * Возвращает текст html атрибутов из массива вида ключ=>значение
+	 * @param array $attr Массив вида ключ=>значение, например array('data-test'=>'testValue', 'class'=>'form-control')
+	 * @return string
+	 */
+	public function getAttrText($attr)
+	{
+		$attrText = '';
+		foreach ($attr as $key => $val) {
+			$attrText .= ' ' . $key . '="' . $val . '" ';
+		}
+		return $attrText;
+	}
 
 	/**
 	 * Получаем день недели по-русски

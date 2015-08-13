@@ -2,6 +2,8 @@
 
 namespace BitrixHelper;
 
+use BitrixHelper\Utils;
+
 class Form
 {
 
@@ -17,7 +19,7 @@ class Form
 	public function Start(array $attr = array())
 	{
 		$arResult = $this->formArray;
-		$attrText = $this->getAttrText($attr);
+		$attrText = Utils::getAttrText($attr);
 		$result = str_replace('<form ', '<form ' . $attrText, $arResult["FORM_HEADER"]);
 		return $result;
 	}
@@ -32,7 +34,7 @@ class Form
 
 	public function Submit($title = 'Отправить', array $attr = array('class' => 'btn btn--default'), $value = 'Сохранить')
 	{
-		return '<button type="submit" ' . $this->getAttrText($attr) . '>' . $title . '</button>';
+		return '<button type="submit" ' . Utils::getAttrText($attr) . '>' . $title . '</button>';
 	}
 
 	public function Success($message = '', array $attr = array('class' => 'alert alert-success'))
@@ -41,7 +43,7 @@ class Form
 		$arResult = $this->formArray;
 		if ($note = $arResult['FORM_NOTE']) {
 			if ($message) $note = $message;
-			$result = '<div' . $this->getAttrText($attr) . '>' . $note . '</div>';
+			$result = '<div' . Utils::getAttrText($attr) . '>' . $note . '</div>';
 		}
 
 		return $result;
@@ -94,7 +96,7 @@ class Form
 
 	public function Label($id, $name = false, array $attr = array())
 	{
-		$attrText = $this->getAttrText($attr);
+		$attrText = Utils::getAttrText($attr);
 		$field = $this->formInfo['FIELDS'][$id];
 		if (!$name)
 			$name = $field['LABEL'];
@@ -108,15 +110,6 @@ class Form
 		return $this->formArray['QUESTIONS'][$name];
 	}
 
-	private function getAttrText($attr)
-	{
-		$attrText = '';
-		foreach ($attr as $key => $val) {
-			$attrText .= ' ' . $key . '="' . $val . '" ';
-		}
-		return $attrText;
-	}
-
 	public function Widget($id, array $attr = array('class' => 'form-control'))
 	{
 		if (in_array($id, $this->printedFields)) return false;
@@ -128,7 +121,7 @@ class Form
 		if ($question['REQUIRED'] == 'Y') {
 			$attr['required'] = 'required';
 		}
-		$attrText = $this->getAttrText($attr);
+		$attrText = Utils::getAttrText($attr);
 		$widget = $question['HTML_CODE'];
 		$widget = preg_replace('(class="(.+?)")', '', $widget);
 		$widget = preg_replace('(size="(.+?)")', '', $widget);
