@@ -123,10 +123,14 @@ class Form
 		}
 		$attrText = Utils::getAttrText($attr);
 		$widget = $question['HTML_CODE'];
+
 		$widget = preg_replace('(class="(.+?)")', '', $widget);
 		$widget = preg_replace('(size="(.+?)")', '', $widget);
 		$widget = str_replace('<input ', '<input id="' . $field['NAME'] . '" ' . $attrText, $widget);
 		$widget = str_replace('<textarea ', '<textarea id="' . $field['NAME'] . '" ' . $attrText, $widget);
+		if ($question['STRUCTURE'][0]['FIELD_TYPE']=='email') {
+			$widget = str_replace('type="text" ', 'type="email"' . $attrText, $widget);
+		}
 		$this->printedFields[] = $id;
 		return $widget;
 	}
