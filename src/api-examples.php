@@ -8,8 +8,14 @@
 /**
  * Получаем список элементов
  */
-$arSelect = Array("ID", "NAME");
-$arFilter = Array("IBLOCK_ID" => "", "ACTIVE" => "Y");
+$arSelect = Array(
+	"ID",
+	"NAME"
+);
+$arFilter = Array(
+	"IBLOCK_ID" => "",
+	"ACTIVE" => "Y"
+);
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 $count = $res->SelectedRowsCount(); // количество полученных записей из таблицы
 while ($ob = $res->GetNext()) {
