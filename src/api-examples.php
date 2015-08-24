@@ -30,7 +30,7 @@ $file = CFile::ResizeImageGet($file_id, array('width' => 150, 'height' => 150), 
 /**
  * Добавление элемента в базу данных
  */
-$el = new CIBlockElement;
+$el = new \CIBlockElement();
 $arLoadProductArray = Array();
 $arLoadProductArray["IBLOCK_ID"] = (int)"";
 $arLoadProductArray["IBLOCK_SECTION_ID"] = (int)"";
@@ -68,4 +68,4 @@ $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
 /**
  * Подключение модулей
  */
-CModule::IncludeModule("iblock"); // подключение информационных блоков
+CModule::IncludeModule("iblock"); // gjlrk.xtybt
