@@ -68,4 +68,4 @@ $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
 /**
  * Подключение модулей
  */
-CModule::IncludeModule("iblock"); // gjlrk.xtybt
+CModule::IncludeModule("iblock"); // подключение информационных блоков
