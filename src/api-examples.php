@@ -1,12 +1,12 @@
 <?php
 
 /**
- * В этом файле собраны наиболее часто встречающиеся примеры кода и готовые решения использования api Битркса
- * Рекомендуется сохранить как live template для phpStorm
+ * Р’ СЌС‚РѕРј С„Р°Р№Р»Рµ СЃРѕР±СЂР°РЅС‹ РЅР°РёР±РѕР»РµРµ С‡Р°СЃС‚Рѕ РІСЃС‚СЂРµС‡Р°СЋС‰РёРµСЃСЏ РїСЂРёРјРµСЂС‹ РєРѕРґР° Рё РіРѕС‚РѕРІС‹Рµ СЂРµС€РµРЅРёСЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ api Р‘РёС‚СЂРєСЃР°
+ * Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ СЃРѕС…СЂР°РЅРёС‚СЊ РєР°Рє live template РґР»СЏ phpStorm
  */
 
 /**
- * Получаем список элементов
+ * РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє СЌР»РµРјРµРЅС‚РѕРІ
  */
 $arSelect = Array(
 	"ID",
@@ -17,50 +17,55 @@ $arFilter = Array(
 	"ACTIVE" => "Y"
 );
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
-$count = $res->SelectedRowsCount(); // количество полученных записей из таблицы
+$count = $res->SelectedRowsCount(); // РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕР»СѓС‡РµРЅРЅС‹С… Р·Р°РїРёСЃРµР№ РёР· С‚Р°Р±Р»РёС†С‹
 while ($ob = $res->GetNext()) {
 	print_r($ob);
 }
 
 /**
- * Ресайз картинки
+ * Р РµСЃР°Р№Р· РєР°СЂС‚РёРЅРєРё
  */
 $file = CFile::ResizeImageGet($file_id, array('width' => 150, 'height' => 150), BX_RESIZE_IMAGE_PROPORTIONAL, true); // BX_RESIZE_IMAGE_EXACT
 
 /**
- * Добавление элемента в базу данных
+ * Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
  */
 $el = new CIBlockElement;
 $arLoadProductArray = Array();
 $arLoadProductArray["IBLOCK_ID"] = (int)"";
 $arLoadProductArray["IBLOCK_SECTION_ID"] = (int)"";
-$arLoadProductArray["NAME"] = "Название";
+$arLoadProductArray["NAME"] = "РќР°Р·РІР°РЅРёРµ";
 $arLoadProductArray["ACTIVE"] = "Y";
 $arLoadProductArray["PREVIEW_TEXT"] = "";
-$arLoadProductArray['PREVIEW_TEXT_TYPE'] = 'html'; // тип текста для PREVIEW_TEXT можно указать при необходимости: text, html, editor
-$arLoadProductArray["PROPERTY_VALUES"]["HTML_OR_TEXT"][0] = array("VALUE" => array("TEXT" => $html_text, "TYPE" => "html")); // добавления свойства типа HTML/Текст
-$arLoadProductArray["PROPERTY_VALUES"]["STATUS"] = "Значение"; // свойство
+$arLoadProductArray['PREVIEW_TEXT_TYPE'] = 'html'; // С‚РёРї С‚РµРєСЃС‚Р° РґР»СЏ PREVIEW_TEXT РјРѕР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё: text, html, editor
+$arLoadProductArray["PROPERTY_VALUES"]["HTML_OR_TEXT"][0] = array("VALUE" => array("TEXT" => $html_text, "TYPE" => "html")); // РґРѕР±Р°РІР»РµРЅРёСЏ СЃРІРѕР№СЃС‚РІР° С‚РёРїР° HTML/РўРµРєСЃС‚
+$arLoadProductArray["PROPERTY_VALUES"]["STATUS"] = "Р—РЅР°С‡РµРЅРёРµ"; // СЃРІРѕР№СЃС‚РІРѕ
 if ($elementID = $el->Add($arLoadProductArray)) {
 } else {
 	echo "Error: " . $el->LAST_ERROR;
 }
 
 /**
- * Изменение элемента
+ * РР·РјРµРЅРµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
  */
 $el = new CIBlockElement;
 $PROP = array();
-$PROP[12] = "Белый"; // свойству с кодом 12 присваиваем значение "Белый"
-$PROP[3] = 38; // свойству с кодом 3 присваиваем значение 38
+$PROP[12] = "Р‘РµР»С‹Р№"; // СЃРІРѕР№СЃС‚РІСѓ СЃ РєРѕРґРѕРј 12 РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ "Р‘РµР»С‹Р№"
+$PROP[3] = 38; // СЃРІРѕР№СЃС‚РІСѓ СЃ РєРѕРґРѕРј 3 РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ 38
 $arLoadProductArray = Array(
-	"MODIFIED_BY" => $USER->GetID(), // элемент изменен текущим пользователем
-	"IBLOCK_SECTION" => false, // элемент лежит в корне раздела
+	"MODIFIED_BY" => $USER->GetID(), // СЌР»РµРјРµРЅС‚ РёР·РјРµРЅРµРЅ С‚РµРєСѓС‰РёРј РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
+	"IBLOCK_SECTION" => false, // СЌР»РµРјРµРЅС‚ Р»РµР¶РёС‚ РІ РєРѕСЂРЅРµ СЂР°Р·РґРµР»Р°
 	"PROPERTY_VALUES" => $PROP,
-	"NAME" => "Элемент",
-	"ACTIVE" => "Y", // активен
-	"PREVIEW_TEXT" => "текст для списка элементов",
-	"DETAIL_TEXT" => "текст для детального просмотра",
+	"NAME" => "Р­Р»РµРјРµРЅС‚",
+	"ACTIVE" => "Y", // Р°РєС‚РёРІРµРЅ
+	"PREVIEW_TEXT" => "С‚РµРєСЃС‚ РґР»СЏ СЃРїРёСЃРєР° СЌР»РµРјРµРЅС‚РѕРІ",
+	"DETAIL_TEXT" => "С‚РµРєСЃС‚ РґР»СЏ РґРµС‚Р°Р»СЊРЅРѕРіРѕ РїСЂРѕСЃРјРѕС‚СЂР°",
 	"DETAIL_PICTURE" => CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"] . "/image.gif")
 );
-$PRODUCT_ID = 2; // изменяем элемент с кодом (ID) 2
+$PRODUCT_ID = 2; // РёР·РјРµРЅСЏРµРј СЌР»РµРјРµРЅС‚ СЃ РєРѕРґРѕРј (ID) 2
 $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
+
+/**
+ * РџРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»РµР№
+ */
+CModule::IncludeModule("iblock"); // РїРѕРґРєР»СЋС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅС‹С… Р±Р»РѕРєРѕРІ
