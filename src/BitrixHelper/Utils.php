@@ -4,6 +4,18 @@ namespace BitrixHelper;
 
 class Utils
 {
+
+	/**
+	 * Возвращает уникальный код, длинной $length символов
+	 * @param int $length
+	 * @return string
+	 */
+	public function getUniqueCode($length = 15)
+	{
+		$hash = substr(bin2hex(hash('sha512', uniqid(mt_rand(), true), true)), 0, $length);
+		return $hash;
+	}
+
 	public static function reArrayFormFiles($files)
 	{
 		$result = array();
