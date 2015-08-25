@@ -66,6 +66,13 @@ $PRODUCT_ID = 2; // изменяем элемент с кодом (ID) 2
 $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
 
 /**
+ * Создание массива информации о файле (например для добавления в PREVIEW_PICTURE элемента:
+ * $arLoadProductArray['PREVIEW_PICTURE'] = $arFile;
+ */
+$arFile = \CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"] . $_POST['pic']);
+
+
+/**
  * Подключение модулей
  */
 CModule::IncludeModule("iblock"); // подключение информационных блоков
