@@ -21,6 +21,8 @@ class Form
 		$arResult = $this->formArray;
 		$attrText = Utils::getAttrText($attr);
 		$result = str_replace('<form ', '<form ' . $attrText, $arResult["FORM_HEADER"]);
+		$action = $this->getAction();
+		$result = preg_replace('/action="(.+?)"/', 'action="'.$action.'"', $result);
 		return $result;
 	}
 
@@ -128,7 +130,7 @@ class Form
 		$widget = preg_replace('(size="(.+?)")', '', $widget);
 		$widget = str_replace('<input ', '<input id="' . $field['NAME'] . '" ' . $attrText, $widget);
 		$widget = str_replace('<textarea ', '<textarea id="' . $field['NAME'] . '" ' . $attrText, $widget);
-		if ($question['STRUCTURE'][0]['FIELD_TYPE']=='email') {
+		if ($question['STRUCTURE'][0]['FIELD_TYPE'] == 'email') {
 			$widget = str_replace('type="text" ', 'type="email"' . $attrText, $widget);
 		}
 		$this->printedFields[] = $id;
@@ -167,9 +169,32 @@ class Form
 
 	private $formArray;
 
+	private $action;
+
+	public function getAction()
+	{
+		return $this->action;
+	}
+
+	/**
+	 * Установка атрибута action формы
+	 * Если не указывается, то устанавливается адрес по умолчанию
+	 * @param string $action
+	 * @return string
+	 */
+	public function setAction($action = '')
+	{
+		if ($action)
+			return $this->action = $action;
+		$formArray = $this->formArray;
+		preg_match('/action="(.+?)"/iu', $formArray['FORM_HEADER'], $matches);
+		return $this->action = $matches[1];
+	}
+
 	public function __construct(array $formArray)
 	{
 		$this->formArray = $formArray;
 		$this->setFormInfo();
+		$this->setAction();
 	}
 }
