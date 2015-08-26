@@ -115,21 +115,29 @@ class Form
 	public function Widget($id, array $attr = array('class' => 'form-control'))
 	{
 		if (in_array($id, $this->printedFields)) return false;
+
 		$question = $this->getQuestion($id);
 		$formInfo = $this->getFormInfo();
 		$field = $formInfo['FIELDS'][$id];
+		$id = $field['NAME'];
+		if ($attr['id']) {
+			$id = $attr['id'];
+			unset($attr['id']);
+		}
+
 		unset($attr['name']);
 		unset($attr['value']);
 		if ($question['REQUIRED'] == 'Y') {
 			$attr['required'] = 'required';
 		}
+
 		$attrText = Utils::getAttrText($attr);
 		$widget = $question['HTML_CODE'];
 
 		$widget = preg_replace('(class="(.+?)")', '', $widget);
 		$widget = preg_replace('(size="(.+?)")', '', $widget);
-		$widget = str_replace('<input ', '<input id="' . $field['NAME'] . '" ' . $attrText, $widget);
-		$widget = str_replace('<textarea ', '<textarea id="' . $field['NAME'] . '" ' . $attrText, $widget);
+		$widget = str_replace('<input ', '<input id="' . $id . '" ' . $attrText, $widget);
+		$widget = str_replace('<textarea ', '<textarea id="' . $id . '" ' . $attrText, $widget);
 		if ($question['STRUCTURE'][0]['FIELD_TYPE'] == 'email') {
 			$widget = str_replace('type="text" ', 'type="email"' . $attrText, $widget);
 		}
