@@ -22,7 +22,7 @@ class Form
 		$attrText = Utils::getAttrText($attr);
 		$result = str_replace('<form ', '<form ' . $attrText, $arResult["FORM_HEADER"]);
 		$action = $this->getAction();
-		$result = preg_replace('/action="(.+?)"/', 'action="'.$action.'"', $result);
+		$result = preg_replace('/action="(.+?)"/', 'action="' . $action . '"', $result);
 		return $result;
 	}
 
