@@ -7,6 +7,16 @@ use BitrixHelper\Utils;
 class Form
 {
 
+	public function resultsById($RESULT_ID)
+	{
+		$data = \CFormResult::GetDataByID($RESULT_ID);
+		$result = array();
+		foreach ($data as $d) {
+			$result[$d[0]['FIELD_ID']] = $d[0]['USER_TEXT'];
+		}
+		return $result;
+	}
+
 	public function Errors()
 	{
 		$result = false;
@@ -199,7 +209,7 @@ class Form
 		return $this->action = $matches[1];
 	}
 
-	public function __construct(array $formArray)
+	public function __construct(array $formArray = array())
 	{
 		$this->formArray = $formArray;
 		$this->setFormInfo();
