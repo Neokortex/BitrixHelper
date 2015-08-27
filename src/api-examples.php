@@ -73,6 +73,18 @@ $arFile = \CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"] . $_POST['pic']);
 
 
 /**
+ * Изменение значения свойства элемента
+ */
+\CIBlockElement::SetPropertyValuesEx($item['ID'], false,
+	array(
+		'QUANTITY' => ($item['PROPERTY_QUANTITY_VALUE'] + 1),
+		'NAME' => ($_POST['name']),
+		'ELEMENT' => ($_POST['element']),
+		'PRICE' => $_POST['price']
+	)
+);
+
+/**
  * Подключение модулей
  */
 CModule::IncludeModule("iblock"); // подключение информационных блоков
