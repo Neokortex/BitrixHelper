@@ -4,6 +4,16 @@ namespace BitrixHelper;
 
 class Utils
 {
+	/**
+	 * Посылает JSON ответ (с соответств. заголоком) и завершает выполнение скрипта
+	 * @param array $array Массив данных, который необходимо преобразовать в JSON
+	 */
+	public static function sendJSONResponse($array)
+	{
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($array);
+		die();
+	}
 
 	/**
 	 * Возвращает уникальный код, длинной $length символов
@@ -19,8 +29,8 @@ class Utils
 	public static function reArrayFormFiles($files)
 	{
 		$result = array();
-		foreach ($files as $key=>$arVal) {
-			foreach ($arVal as $fileKey=>$val){
+		foreach ($files as $key => $arVal) {
+			foreach ($arVal as $fileKey => $val) {
 				$result[$fileKey][$key] = $val;
 			}
 		}
