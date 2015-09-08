@@ -78,6 +78,11 @@ class Form
 				$info['MESSAGE'] = $error;
 				$errors['ALL_ERRORS'][] = $error;
 			}
+			if (preg_match('/(e\-mail)/', $error)) {
+				$info['CODE'] = 'email';
+				$info['MESSAGE'] = $error;
+				$errors['ALL_ERRORS'][] = $error;
+			}
 			if (preg_match('/(файл)/ui', $error)) {
 				$info['CODE'] = 'file';
 				$info['MESSAGE'] = $error;
