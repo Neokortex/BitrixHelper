@@ -141,16 +141,21 @@ class Form
 		}
 
 		unset($attr['name']);
-		unset($attr['value']);
+
 		if ($question['REQUIRED'] == 'Y') {
 			$attr['required'] = 'required';
 		}
-
-		$attrText = Utils::getAttrText($attr);
 		$widget = $question['HTML_CODE'];
-
 		$widget = preg_replace('(class="(.+?)")', '', $widget);
 		$widget = preg_replace('(size="(.+?)")', '', $widget);
+		if (array_key_exists('value', $attr)) {
+			if (empty($this->formArray['arrVALUES']) == true) {
+				$widget = preg_replace('/value="(.*?)"/iu', '', $widget);
+			} else {
+				unset($attr['value']);
+			}
+		}
+		$attrText = Utils::getAttrText($attr);
 		$widget = str_replace('<input ', '<input id="' . $id . '" ' . $attrText, $widget);
 		$widget = str_replace('<textarea ', '<textarea id="' . $id . '" ' . $attrText, $widget);
 		if ($question['STRUCTURE'][0]['FIELD_TYPE'] == 'email') {
