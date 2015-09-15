@@ -4,6 +4,42 @@ namespace BitrixHelper;
 
 class Utils
 {
+	public static function DeleteParam($ParamNames)
+	{
+		if (count($_GET) < 1)
+			return "";
+		$aParams = $_GET;
+		foreach (array_keys($aParams) as $key) {
+			foreach ($ParamNames as $param) {
+				if (strcasecmp($param, $key) == 0) {
+					if (is_array($ParamNames[$key])) {
+						foreach ($ParamNames[$key] as $v) {
+							unset($aParams[$key][$v]);
+						}
+					} else {
+						unset($aParams[$key]);
+					}
+
+					break;
+				}
+			}
+		}
+		return http_build_query($aParams, "", "&");
+	}
+
+	public static function GetCurPageParam($strParam = "", $arParamKill = array(), $get_index_page = null)
+	{
+		global $APPLICATION;
+		$sUrlPath = $APPLICATION->GetCurPage($get_index_page);
+		$strNavQueryString = static::DeleteParam($arParamKill);
+		if ($strNavQueryString <> "" && $strParam <> "")
+			$strNavQueryString = "&" . $strNavQueryString;
+		if ($strNavQueryString == "" && $strParam == "")
+			return $sUrlPath;
+		else
+			return $sUrlPath . "?" . $strParam . $strNavQueryString;
+	}
+
 	/**
 	 * Посылает JSON ответ (с соответств. заголоком) и завершает выполнение скрипта
 	 * @param array $array Массив данных, который необходимо преобразовать в JSON
