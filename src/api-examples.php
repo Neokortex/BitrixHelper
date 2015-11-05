@@ -85,16 +85,6 @@ $arFile = \CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"] . $_POST['pic']);
 );
 
 /**
- * Получение списка разделов
- */
-$arFilter = array('IBLOCK_ID' => $arParams['IBLOCK_ID'], 'ID' => $arResult['SECTION']['IBLOCK_SECTION_ID']); // выберет потомков без учета активности
-$arSelect = array('UF_*');
-$rsSect = CIBlockSection::GetList(array('left_margin' => 'asc'), $arFilter, false, $arSelect);
-while ($arSect = $rsSect->GetNext()) {
-	\BitrixHelper\Utils::Message($arSect);
-}
-
-/**
  * Подключение модулей
  */
 CModule::IncludeModule("iblock"); // подключение информационных блоков
