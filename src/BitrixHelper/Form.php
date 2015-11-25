@@ -159,7 +159,7 @@ class Form
 		$widget = str_replace('<input ', '<input id="' . $id . '" ' . $attrText, $widget);
 		$widget = str_replace('<textarea ', '<textarea id="' . $id . '" ' . $attrText, $widget);
 		if ($question['STRUCTURE'][0]['FIELD_TYPE'] == 'email') {
-			$widget = str_replace('type="text" ', 'type="email"', $widget);
+			$widget = str_replace('type="text" ', 'type="email"' . $attrText, $widget);
 		}
 		$this->printedFields[] = $id;
 		return $widget;

@@ -4,6 +4,42 @@ namespace BitrixHelper;
 
 class Utils
 {
+	public static function DeleteParam($ParamNames)
+	{
+		if (count($_GET) < 1)
+			return "";
+		$aParams = $_GET;
+		foreach (array_keys($aParams) as $key) {
+			foreach ($ParamNames as $param) {
+				if (strcasecmp($param, $key) == 0) {
+					if (is_array($ParamNames[$key])) {
+						foreach ($ParamNames[$key] as $v) {
+							unset($aParams[$key][$v]);
+						}
+					} else {
+						unset($aParams[$key]);
+					}
+
+					break;
+				}
+			}
+		}
+		return http_build_query($aParams, "", "&");
+	}
+
+	public static function GetCurPageParam($strParam = "", $arParamKill = array(), $get_index_page = null)
+	{
+		global $APPLICATION;
+		$sUrlPath = $APPLICATION->GetCurPage($get_index_page);
+		$strNavQueryString = static::DeleteParam($arParamKill);
+		if ($strNavQueryString <> "" && $strParam <> "")
+			$strNavQueryString = "&" . $strNavQueryString;
+		if ($strNavQueryString == "" && $strParam == "")
+			return $sUrlPath;
+		else
+			return $sUrlPath . "?" . $strParam . $strNavQueryString;
+	}
+
 	/**
 	 * Посылает JSON ответ (с соответств. заголоком) и завершает выполнение скрипта
 	 * @param array $array Массив данных, который необходимо преобразовать в JSON
@@ -402,6 +438,17 @@ class Utils
 	}
 
 	/**
+	 * Переадресация
+	 * @static
+	 * @param $url string Адрес для переадресации
+	 */
+	public static function Redirect($url, $status = 302)
+	{
+		header('HTTP/1.1 '.$status.' Moved Permanently');
+		header('Location:' . $url);
+	}
+
+	/**
 	 * Форматирование числа в красивый вид
 	 * @static
 	 * @param $number string Число для преобразования
@@ -425,7 +472,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	public function translite($str)
+	public static function translite($str)
 	{
 		$str = mb_strtolower($str);
 		$converter = array(
@@ -442,8 +489,8 @@ class Utils
 			'э' => 'e', 'ю' => 'yu', 'я' => 'ya',
 		);
 		$str = strtr($str, $converter);
-		$str = preg_replace('~[^-a-z0-9_]+~u', '_', $str);
-		$str = trim($str, "_");
+		$str = preg_replace('~[^-a-z0-9_]+~u', '-', $str);
+		$str = trim($str, "-");
 		return $str;
 	}
 
