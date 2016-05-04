@@ -4,6 +4,22 @@ namespace BitrixHelper;
 
 class Utils
 {
+
+	public static function setFlash($key, $text)
+	{
+		$_SESSION['BX_HELPER_FLASH_'.$key] = $text;
+	}
+
+	public static function getFlash($key)
+	{
+		$result = false;
+		if (isset($_SESSION['BX_HELPER_FLASH_'.$key])) {
+			$result = $_SESSION['BX_HELPER_FLASH_'.$key];
+			unset($_SESSION['BX_HELPER_FLASH_'.$key]);
+		}
+		return $result;
+	}
+
 	public static function DeleteParam($ParamNames)
 	{
 		if (count($_GET) < 1)
@@ -444,7 +460,7 @@ class Utils
 	 */
 	public static function Redirect($url, $status = 302)
 	{
-		header('HTTP/1.1 '.$status.' Moved Permanently');
+		header('HTTP/1.1 ' . $status . ' Moved Permanently');
 		header('Location:' . $url);
 	}
 
