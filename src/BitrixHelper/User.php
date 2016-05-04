@@ -40,7 +40,7 @@ class User
 		if (!$userId) {
 			$userId = $this->BitrixUser->GetID();
 		}
-		return $this->userId = $userId;
+		$this->userId = $userId;
 	}
 
 	public function getUserId()
