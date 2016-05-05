@@ -14,7 +14,7 @@ class User
 		//\BitrixHelper\Utils::Message($rsUser);
 		$arUser = $rsUser->Fetch();
 		//\BitrixHelper\Utils::Message($arUser);
-		$arUser['FIO'] = trim($arUser['NAME'] . ' ' . $arUser['SECOND_NAME'] . ' ' . $arUser['LAST_NAME']);
+		$arUser['FIO'] = trim($arUser['LAST_NAME'] . ' ' . $arUser['NAME'] . ' ' . $arUser['SECOND_NAME']);
 		return $this->userInfo = $arUser;
 	}
 

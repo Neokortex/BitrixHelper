@@ -8,6 +8,7 @@ class Utils
 	public static function setFlash($key, $text)
 	{
 		$_SESSION['BX_HELPER_FLASH_'.$key] = $text;
+		//\BitrixHelper\Utils::Message($_SESSION);
 	}
 
 	public static function getFlash($key)
@@ -451,6 +452,7 @@ class Utils
 	{
 		header('HTTP/1.1 301 Moved Permanently');
 		header('Location:' . $url);
+		exit();
 	}
 
 	/**
