@@ -98,3 +98,12 @@ while ($arSect = $rsSect->GetNext()) {
  * Подключение модулей
  */
 CModule::IncludeModule("iblock"); // подключение информационных блоков
+
+
+/**
+ * Список пользователей
+ */
+$rsUsers = CUser::GetList(($by = "LAST_NAME"), ($order = "asc"), $filter = array());
+while ($arUser = $rsUsers->GetNext()) {
+	\BitrixHelper\Utils::Message($arUser);
+}
