@@ -98,3 +98,21 @@ while ($arSect = $rsSect->GetNext()) {
  * Подключение модулей
  */
 CModule::IncludeModule("iblock"); // подключение информационных блоков
+
+
+/**
+ * Список пользователей
+ */
+$rsUsers = CUser::GetList(($by = "LAST_NAME"), ($order = "asc"), $filter = array());
+while ($arUser = $rsUsers->GetNext()) {
+	\BitrixHelper\Utils::Message($arUser);
+}
+
+/**
+ * Изменение информации о пользователе
+ */
+$user = new CUser;
+$fields = Array(
+	"EMAIL" => 'undefined@mail.com',
+);
+$user->Update($arUser['ID'], $fields);

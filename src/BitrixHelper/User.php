@@ -9,18 +9,15 @@ class User
 
 	private function setUserInfo()
 	{
-		//\BitrixHelper\Utils::Message($this->getUserId());
 		$rsUser = $this->BitrixUser->GetByID($this->getUserId());
-		//\BitrixHelper\Utils::Message($rsUser);
 		$arUser = $rsUser->Fetch();
-		//\BitrixHelper\Utils::Message($arUser);
-		$arUser['FIO'] = trim($arUser['NAME'] . ' ' . $arUser['SECOND_NAME'] . ' ' . $arUser['LAST_NAME']);
+		$arUser['FIO'] = trim($arUser['LAST_NAME'] . ' ' . $arUser['NAME'] . ' ' . $arUser['SECOND_NAME']);
 		return $this->userInfo = $arUser;
 	}
 
-	public function getUserInfo()
+	public function getUserInfo($force = false)
 	{
-		if (empty($this->userInfo))
+		if (empty($this->userInfo) || $force===true)
 			$this->setUserInfo();
 		return $this->userInfo;
 	}
@@ -30,6 +27,8 @@ class User
 	private function setBitrixUser()
 	{
 		global $USER;
+		if (!is_object($USER))
+			$USER = new \CUser;
 		$this->BitrixUser = $USER;
 	}
 
@@ -50,6 +49,7 @@ class User
 
 	public function __construct($userId = false)
 	{
+
 		$this->setBitrixUser();
 		$this->setUserId($userId);
 	}
